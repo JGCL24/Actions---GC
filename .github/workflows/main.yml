@@ -1,0 +1,32 @@
+name: Pipeline Python Básica
+
+# 1. Gatilho: Executa a cada push
+on: [push]
+
+jobs:
+  python-demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Passo 1: Baixar o código
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      # Passo 2: Configurar o Python (A action que você escolheu)
+      - name: Configurar Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10' 
+          # Você pode mudar para '3.12' ou outra versão se quiser
+
+      # Passo 3: Comandos de teste
+      - name: Validar ambiente e executar script
+        run: |
+          echo "Verificando versão instalada:"
+          python --version
+          
+          echo "Listando pacotes instalados (pip):"
+          pip list
+          
+          echo "Executando um print via Python:"
+          python -c "print('Sucesso! O Python rodou dentro do GitHub Actions.')"
